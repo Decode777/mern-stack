@@ -55,3 +55,4 @@ export const logoutUser = async (request, response) => {
 
     response.status(204).json({ msg: 'logout successfull' });
 }
+

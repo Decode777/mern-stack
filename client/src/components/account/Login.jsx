@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
 import { Box, Button, TextField, Typography, styled } from '@mui/material';
+import React, { useState } from 'react';
+import blogImage from './BloggingWithoutBoundaries.png';
 
 const Component =styled(Box)`
     width:400px;
@@ -8,7 +9,8 @@ const Component =styled(Box)`
 `
 
 const Image = styled('img')({
-  width: 100,
+  width: 400,
+  height: 200,
   display: 'flex',
   margin: 'auto',
   padding: '50px 0 0'
@@ -27,7 +29,7 @@ const Image = styled('img')({
 
    const LoginButton = styled(Button)`
    text-transform: none;
-   background: #FB641B;
+   background: black;
    color: #fff;
    height: 48px;
    border-radius: 2px;
@@ -72,7 +74,7 @@ const signupInitialValues = {
 
 const Login = () => {
 
-   const imageURL='https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png';
+  const imageURL = blogImage;
 
    const[account,toggleAccount]= useState('login');
    const[signup,setSignup] = useState(signupInitialValues);
@@ -109,7 +111,7 @@ const Login = () => {
           <Text style={{ textAlign:'center'}}>OR</Text>
           <LoginButton variant='contained' onClick={() => toggleSignUp()}>Already have an Account</LoginButton>
       </Wrapper>
-}
+} 
       </Box>
     </Component>  
   )

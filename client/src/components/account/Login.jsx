@@ -116,16 +116,35 @@ const Login = ({ isUserAuthenticated }) => {
       }
   }
 
-  const signupUser = async () => {
-      let response = await API.userSignup(signup);
-      if (response.isSuccess) {
-          showError('');
-          setSignup(signupInitialValues);
-          toggleAccount('login');
-      } else {
-          showError('Something went wrong! please try again later');
-      }
-  }
+//   const signupUser = async () => {
+//       let response = await API.userSignup(signup);
+//       if (response.isSuccess) {
+//           showError('');
+//           setSignup(signupInitialValues);
+//           toggleAccount('login');
+//       } else {
+//           showError('Something went wrong! please try again later');
+//       }
+//   }
+
+const signupUser = async () => {
+    try {
+        console.log('Signup data:', signup);
+        let response = await API.userSignup(signup);
+        console.log('Signup response:', response);
+        if (response.isSuccess) {
+            showError('');
+            setSignup(signupInitialValues);
+            toggleAccount('login');
+        } else {
+            console.error('Signup failed:', response);
+            showError('Signup failed. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error during signup:', error);
+        showError('An error occurred during signup. Please try again.');
+    }
+}
 
   const toggleSignup = () => {
       account === 'signup' ? toggleAccount('login') : toggleAccount('signup');

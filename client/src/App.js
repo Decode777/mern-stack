@@ -1,27 +1,36 @@
 import { useState } from 'react';
 
 import { Box } from '@mui/material';
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 //components
-import DataProvider from './context/DataProvider';
+import About from './components/about/About';
+import Login from './components/account/Login';
+import Contact from './components/contact/Contact';
+import CreatePost from './components/create/CreatePost';
+import Update from './components/create/Update';
+import DetailView from './components/details/DetailView';
 import Header from './components/header/Header';
 import Home from './components/home/Home';
-import CreatePost from './components/create/CreatePost';
-import DetailView from './components/details/DetailView';
-import Update from './components/create/Update';
-import About from './components/about/About';
-import Contact from './components/contact/Contact';
-import Login from './components/account/Login';
+import DataProvider from './context/DataProvider';
 
 const PrivateRoute = ({ isAuthenticated, ...props }) => {
   const token = sessionStorage.getItem('accessToken');
-  return isAuthenticated && token ? 
+  return isAuthenticated ? 
     <>
       <Header />
       <Outlet />
     </> : <Navigate replace to='/account' />
 };
+
+// const PrivateRoute = ({ ...props }) => {
+//   const token = sessionStorage.getItem('accessToken');
+//   return token ? 
+//     <>
+//       <Header />
+//       <Outlet />
+//     </> : <Navigate replace to='/account' />
+// };
 
 function App() {
 

@@ -71,7 +71,7 @@ const signupInitialValues = {
   name: '',
   username: '',
   password: '',
-};
+}; 
 
 
 

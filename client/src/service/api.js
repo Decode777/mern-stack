@@ -85,7 +85,7 @@ const ProcessError = async (error) => {
             //     return Promise.reject(error)
             // }
         } else {
-            console.log("ERROR IN RESPONSE: ", error.toJSON());
+            console.log("ERROR IN RESPONSE: ", error);
             return {
                 isError: true,
                 msg: API_NOTIFICATION_MESSAGES.responseFailure,
@@ -94,7 +94,7 @@ const ProcessError = async (error) => {
         }
     } else if (error.request) { 
         // The request was made but no response was received
-        console.log("ERROR IN RESPONSE: ", error.toJSON());
+        console.log("ERROR IN RESPONSE: ", error);
         return {
             isError: true,
             msg: API_NOTIFICATION_MESSAGES.requestFailure,
@@ -102,7 +102,7 @@ const ProcessError = async (error) => {
         }
     } else { 
         // Something happened in setting up the request that triggered an Error
-        console.log("ERROR IN RESPONSE: ", error.toJSON());
+        console.log("ERROR IN RESPONSE: ", error);
         return {
             isError: true,
             msg: API_NOTIFICATION_MESSAGES.networkError,
@@ -139,4 +139,23 @@ for (const [key, value] of Object.entries(SERVICE_URLS)) {
         });
 }
 
+// New API.userLogin function
+API.userLogin = (body, showUploadProgress, showDownloadProgress) => {
+    console.log('Sending login request:', body);
+    return axiosInstance({
+        method: SERVICE_URLS.userLogin.method,
+        url: SERVICE_URLS.userLogin.url,
+        data: body,
+        headers: {
+            "content-type": "application/json"
+        },
+        TYPE: getType(SERVICE_URLS.userLogin, body),
+    }).then(response => {
+        console.log('Login response:', response);
+        return processResponse(response);
+    }).catch(error => {
+        console.error('Login error:', error.response || error);
+        return Promise.reject(ProcessError(error));
+    });
+};
 export { API };
